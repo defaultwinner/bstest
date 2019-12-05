@@ -21,6 +21,7 @@ class MyClient(discord.Client):
 		return ["Hey"]
 
 	def get_recent(self, message):
+		#TODO get recent searches
 		return ["you tried searching recent keywords"]
 	
 	def search_google(self, message):
@@ -36,7 +37,6 @@ class MyClient(discord.Client):
 			if message.content.split()[0].lower() in self.actions:
 				response = self.actions[message.content.split()[0]](message)
 				for m in response:
-					print(m)
 					await message.channel.send(m)
 
 client = MyClient()
