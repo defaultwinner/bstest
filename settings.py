@@ -1,7 +1,7 @@
 discord_bot_name="bs_test"
 discord_client_id = "650796075887624205"
 discord_client_secret = "4XLvzF12eQL0Vb-hLgucsIhX2EoYJZbC"
-discord_token = "NjUwNzk2MDc1ODg3NjI0MjA1.XeuFLg.uZetuORLWrGmRZmsD0qHqlGv8f8"
+discord_token = "NjUwNzk2MDc1ODg3NjI0MjA1.XeutmQ.1uNwVNGCIfYS45Cx0lcmc9G_ZxY"
 discord_guild = "https://discord.gg/zuPbPVf"
 
 
