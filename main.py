@@ -3,10 +3,13 @@ import discord
 import settings
 import google
 import sqlite3
+import redis
 
 DEFAULT_PATH = os.path.join(os.path.dirname(__file__), 'database.sqlite3')
 
 con = sqlite3.connect('db.sqlite3')
+
+r = redis.from_url(settings.REDIS_URL)
 
 class MyClient(discord.Client):
 	def __init__(self, *args, **kwargs):
@@ -21,11 +24,15 @@ class MyClient(discord.Client):
 		return ["Hey"]
 
 	def get_recent(self, message):
-		#TODO get recent searches
-		return ["you tried searching recent keywords"]
+		search_keyword = " ".join(message.content.split()[1:])
+		recent_list = list(r.lrange(str(message.author),0, 10))
+		recent_search = [str(s) for s in recent_list if search_keyword in str(s)]
+		return recent_search
 	
 	def search_google(self, message):
 		search_keyword = " ".join(message.content.split()[1:])
+		r.lpush(str(message.author), search_keyword)
+		r.ltrim(str(message.author),0, 20)
 		return google.google_results(search_keyword)
 	
 
@@ -37,7 +44,7 @@ class MyClient(discord.Client):
 			if message.content.split()[0].lower() in self.actions:
 				response = self.actions[message.content.split()[0]](message)
 				for m in response:
-					await message.channel.send(m)
+					await message.channel.send(str(m))
 
 client = MyClient()
 client.run(settings.discord_token)
