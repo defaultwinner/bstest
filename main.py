@@ -11,7 +11,7 @@ con = sqlite3.connect('db.sqlite3')
 
 r = redis.from_url(settings.REDIS_URL)
 
-class MyClient(discord.Client):
+class DiscordClient(discord.Client):
 	def __init__(self, *args, **kwargs):
 		self.actions = {
 		"!google": self.search_google,
@@ -46,5 +46,5 @@ class MyClient(discord.Client):
 				for m in response:
 					await message.channel.send(str(m))
 
-client = MyClient()
+client = DiscordClient()
 client.run(settings.discord_token)
