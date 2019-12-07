@@ -24,6 +24,8 @@ class DiscordClient(discord.Client):
 		return ["Hey"]
 
 	def get_recent(self, message):
+		''' Return Recent searches by the user 
+		 '''
 		search_keyword = " ".join(message.content.split()[1:])
 		recent_list = list(r.lrange(str(message.author),0, 10))
 		recent_search = [str(s) for s in recent_list if search_keyword in str(s)]
@@ -40,11 +42,11 @@ class DiscordClient(discord.Client):
 		print('Logged on as {0}!'.format(self.user))
 
 	async def on_message(self, message):
-		if str(message.author).split("#")[0]!=settings.discord_bot_name:
-			if message.content.split()[0].lower() in self.actions:
-				response = self.actions[message.content.split()[0]](message)
-				for m in response:
-					await message.channel.send(str(m))
+		if (str(message.author).split("#")[0]!=settings.discord_bot_name and 
+		message.content.split()[0].lower() in self.actions):
+			response = self.actions[message.content.split()[0]](message)
+			for m in response:
+				await message.channel.send(str(m))
 
 client = DiscordClient()
 client.run(settings.discord_token)
