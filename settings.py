@@ -6,7 +6,7 @@ load_dotenv()
 discord_bot_name="bs_test"
 discord_client_id = "650796075887624205"
 discord_client_secret = "4XLvzF12eQL0Vb-hLgucsIhX2EoYJZbC"
-discord_token = os.environ('DISCORD_TOKEN')
+discord_token = os.environ['DISCORD_TOKEN']
 discord_guild = "https://discord.gg/zuPbPVf"
 
 
