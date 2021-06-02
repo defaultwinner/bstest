@@ -20,7 +20,7 @@ redis==3.3.11
 requests==2.22.0
 sqlparse==0.3.0
 typing-extensions==3.7.4.1
-urllib3==1.25.7
+urllib3==1.26.5
 websockets==6.0
 Werkzeug==0.16.0
 yarl==1.4.1
